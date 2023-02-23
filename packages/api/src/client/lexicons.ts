@@ -3336,6 +3336,28 @@ export const schemaDict = {
       },
     },
   },
+  AppBskyFeedHide: {
+    lexicon: 1,
+    id: 'app.bsky.feed.hide',
+    defs: {
+      main: {
+        type: 'procedure',
+        description: 'Hide a post from future timelines.',
+        input: {
+          encoding: 'application/json',
+          schema: {
+            type: 'object',
+            required: ['uri'],
+            properties: {
+              uri: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
   AppBskyFeedPost: {
     lexicon: 1,
     id: 'app.bsky.feed.post',
@@ -3552,6 +3574,28 @@ export const schemaDict = {
                 type: 'string',
               },
               downvote: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  AppBskyFeedUnhide: {
+    lexicon: 1,
+    id: 'app.bsky.feed.unhide',
+    defs: {
+      main: {
+        type: 'procedure',
+        description: 'Unhide a post from future timelines.',
+        input: {
+          encoding: 'application/json',
+          schema: {
+            type: 'object',
+            required: ['uri'],
+            properties: {
+              uri: {
                 type: 'string',
               },
             },
@@ -4136,9 +4180,11 @@ export const ids = {
   AppBskyFeedGetRepostedBy: 'app.bsky.feed.getRepostedBy',
   AppBskyFeedGetTimeline: 'app.bsky.feed.getTimeline',
   AppBskyFeedGetVotes: 'app.bsky.feed.getVotes',
+  AppBskyFeedHide: 'app.bsky.feed.hide',
   AppBskyFeedPost: 'app.bsky.feed.post',
   AppBskyFeedRepost: 'app.bsky.feed.repost',
   AppBskyFeedSetVote: 'app.bsky.feed.setVote',
+  AppBskyFeedUnhide: 'app.bsky.feed.unhide',
   AppBskyFeedVote: 'app.bsky.feed.vote',
   AppBskyGraphAssertCreator: 'app.bsky.graph.assertCreator',
   AppBskyGraphAssertMember: 'app.bsky.graph.assertMember',

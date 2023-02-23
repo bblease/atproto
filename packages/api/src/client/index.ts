@@ -73,9 +73,11 @@ import * as AppBskyFeedGetPostThread from './types/app/bsky/feed/getPostThread'
 import * as AppBskyFeedGetRepostedBy from './types/app/bsky/feed/getRepostedBy'
 import * as AppBskyFeedGetTimeline from './types/app/bsky/feed/getTimeline'
 import * as AppBskyFeedGetVotes from './types/app/bsky/feed/getVotes'
+import * as AppBskyFeedHide from './types/app/bsky/feed/hide'
 import * as AppBskyFeedPost from './types/app/bsky/feed/post'
 import * as AppBskyFeedRepost from './types/app/bsky/feed/repost'
 import * as AppBskyFeedSetVote from './types/app/bsky/feed/setVote'
+import * as AppBskyFeedUnhide from './types/app/bsky/feed/unhide'
 import * as AppBskyFeedVote from './types/app/bsky/feed/vote'
 import * as AppBskyGraphAssertCreator from './types/app/bsky/graph/assertCreator'
 import * as AppBskyGraphAssertMember from './types/app/bsky/graph/assertMember'
@@ -161,9 +163,11 @@ export * as AppBskyFeedGetPostThread from './types/app/bsky/feed/getPostThread'
 export * as AppBskyFeedGetRepostedBy from './types/app/bsky/feed/getRepostedBy'
 export * as AppBskyFeedGetTimeline from './types/app/bsky/feed/getTimeline'
 export * as AppBskyFeedGetVotes from './types/app/bsky/feed/getVotes'
+export * as AppBskyFeedHide from './types/app/bsky/feed/hide'
 export * as AppBskyFeedPost from './types/app/bsky/feed/post'
 export * as AppBskyFeedRepost from './types/app/bsky/feed/repost'
 export * as AppBskyFeedSetVote from './types/app/bsky/feed/setVote'
+export * as AppBskyFeedUnhide from './types/app/bsky/feed/unhide'
 export * as AppBskyFeedVote from './types/app/bsky/feed/vote'
 export * as AppBskyGraphAssertCreator from './types/app/bsky/graph/assertCreator'
 export * as AppBskyGraphAssertMember from './types/app/bsky/graph/assertMember'
@@ -1009,6 +1013,17 @@ export class FeedNS {
       })
   }
 
+  hide(
+    data?: AppBskyFeedHide.InputSchema,
+    opts?: AppBskyFeedHide.CallOptions,
+  ): Promise<AppBskyFeedHide.Response> {
+    return this._service.xrpc
+      .call('app.bsky.feed.hide', opts?.qp, data, opts)
+      .catch((e) => {
+        throw AppBskyFeedHide.toKnownErr(e)
+      })
+  }
+
   setVote(
     data?: AppBskyFeedSetVote.InputSchema,
     opts?: AppBskyFeedSetVote.CallOptions,
@@ -1017,6 +1032,17 @@ export class FeedNS {
       .call('app.bsky.feed.setVote', opts?.qp, data, opts)
       .catch((e) => {
         throw AppBskyFeedSetVote.toKnownErr(e)
+      })
+  }
+
+  unhide(
+    data?: AppBskyFeedUnhide.InputSchema,
+    opts?: AppBskyFeedUnhide.CallOptions,
+  ): Promise<AppBskyFeedUnhide.Response> {
+    return this._service.xrpc
+      .call('app.bsky.feed.unhide', opts?.qp, data, opts)
+      .catch((e) => {
+        throw AppBskyFeedUnhide.toKnownErr(e)
       })
   }
 }

@@ -332,4 +332,26 @@ export class FeedService {
       },
     }
   }
+  
+  async hide(info: { uri: string; hiddenByDid: string; createdAt?: Date }) {
+    const { uri, hiddenByDid, createdAt = new Date() } = info
+    await this.db.db
+      .insertInto('hide')
+      .values({
+        uri,
+        hiddenByDid,
+        createdAt: createdAt.toISOString(),
+      })
+      .onConflict((oc) => oc.doNothing())
+      .execute()
+  }
+
+  async unhide(info: { uri: string; hiddenByDid: string }) {
+    const { uri, hiddenByDid } = info
+    await this.db.db
+      .deleteFrom('hide')
+      .where('uri', '=', uri)
+      .where('hiddenByDid', '=', hiddenByDid)
+      .execute()
+  }
 }
