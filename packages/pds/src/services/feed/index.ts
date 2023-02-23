@@ -332,7 +332,7 @@ export class FeedService {
       },
     }
   }
-  
+
   async hide(info: { uri: string; hiddenByDid: string; createdAt?: Date }) {
     const { uri, hiddenByDid, createdAt = new Date() } = info
     await this.db.db

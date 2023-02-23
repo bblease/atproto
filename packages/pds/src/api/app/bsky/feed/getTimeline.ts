@@ -13,29 +13,29 @@ export default function (server: Server, ctx: AppContext) {
       const db = ctx.db.db
       const { ref } = db.dynamic
       const requester = auth.credentials.did
-            
+
       const feedService = ctx.services.feed(ctx.db)
-      
+
       // which users are muted?
       const mutedQb = db
         .selectFrom('mute')
         .select('did')
         .where('mutedByDid', '=', requester)
-        
+
       const hiddenQb = db
         .selectFrom('hide')
         .select('uri')
         .where('hiddenByDid', '=', requester)
-      
-      let postQb;
-      let repostQb;
-      switch(algorithm) {
-        case FeedAlgorithm.ReverseChronological: {
+
+      let postQb
+      let repostQb
+      switch (algorithm) {
+        case FeedAlgorithm.ReverseChronological:
           const followingIdsSubquery = db
             .selectFrom('follow')
             .select('follow.subjectDid')
             .where('follow.creator', '=', requester)
-          
+
           postQb = feedService
             .selectPostQb()
             .where((qb) =>
@@ -45,7 +45,7 @@ export default function (server: Server, ctx: AppContext) {
             )
             .whereNotExists(mutedQb.whereRef('did', '=', ref('post.creator'))) // Hide posts of muted actors
             .whereNotExists(hiddenQb.whereRef('uri', '=', ref('post.uri'))) // Remove hidden posts
-            
+
           repostQb = feedService
             .selectRepostQb()
             .where((qb) =>
@@ -60,16 +60,17 @@ export default function (server: Server, ctx: AppContext) {
             )
             .whereNotExists(
               hiddenQb
-              .whereRef('uri', '=', ref('post.uri')
-              .orWhereRef('uri', '=', ref('repost.uri'))))
-        }
-        
-        case FeedAlgorithm.AllPosts: {
+                .whereRef('uri', '=', ref('post.uri'))
+                .orWhereRef('uri', '=', ref('repost.uri')),
+            )
+          break
+
+        case FeedAlgorithm.AllPosts:
           postQb = feedService
             .selectPostQb()
             .whereNotExists(mutedQb.whereRef('did', '=', ref('post.creator'))) // Hide posts of muted actors
             .whereNotExists(hiddenQb.whereRef('uri', '=', ref('post.uri'))) // Remove hidden posts
-            
+
           repostQb = feedService
             .selectRepostQb()
             .whereNotExists(
@@ -79,12 +80,12 @@ export default function (server: Server, ctx: AppContext) {
             )
             .whereNotExists(
               hiddenQb
-              .whereRef('uri', '=', ref('post.uri')
-              .orWhereRef('uri', '=', ref('repost.uri'))))
-        }
-        default: {
+                .whereRef('uri', '=', ref('post.uri'))
+                .orWhereRef('uri', '=', ref('repost.uri')),
+            )
+          break
+        default:
           throw new InvalidRequestError(`Unsupported algorithm: ${algorithm}`)
-        }
       }
 
       const keyset = new FeedKeyset(ref('cursor'), ref('postCid'))
@@ -96,8 +97,8 @@ export default function (server: Server, ctx: AppContext) {
         before,
         keyset,
       })
-      
-      const feedItems: FeedRow[] = await feedItemsQb.execute() as FeedRow[];
+
+      const feedItems: FeedRow[] = (await feedItemsQb.execute()) as FeedRow[]
       const feed = await composeFeed(feedService, feedItems, requester)
 
       return {

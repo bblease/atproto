@@ -206,11 +206,11 @@ export class ActorService {
     const found = await this.db.db
       .selectFrom('did_handle')
       .where('did_handle.did', '=', did)
-      .innerJoin('user', 'user.handle', 'did_handle.handle')
+      .innerJoin('user_account', 'user_account.did', 'did_handle.did')
       .selectAll()
       .executeTakeFirst()
     if (!found) return false
-    return scrypt.verify(password, found.password)
+    return scrypt.verify(password, found.passwordScrypt)
   }
 
   async mute(info: { did: string; mutedByDid: string; createdAt?: Date }) {
