@@ -9,7 +9,7 @@ export default function (server: Server, ctx: AppContext) {
       const { uri } = input.body
       const requester = auth.credentials.did
       const { db, services } = ctx
-      
+
       await services.feed(db).hide({
         uri,
         hiddenByDid: requester,
@@ -17,4 +17,3 @@ export default function (server: Server, ctx: AppContext) {
     },
   })
 }
-

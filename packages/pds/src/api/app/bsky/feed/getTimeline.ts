@@ -9,7 +9,8 @@ export default function (server: Server, ctx: AppContext) {
   server.app.bsky.feed.getTimeline({
     auth: ctx.accessVerifier,
     handler: async ({ params, auth }) => {
-      const { algorithm, limit, before } = params
+      const { limit, before } = params
+      let { algorithm } = params
       const db = ctx.db.db
       const { ref } = db.dynamic
       const requester = auth.credentials.did
@@ -27,10 +28,16 @@ export default function (server: Server, ctx: AppContext) {
         .select('uri')
         .where('hiddenByDid', '=', requester)
       
-      let postQb;
-      let repostQb;
+      let postQb
+      let repostQb 
+      
+      // default to reverse chronilogical
+      if (algorithm === undefined) {
+        algorithm = FeedAlgorithm.ReverseChronological
+      }
+      
       switch(algorithm) {
-        case FeedAlgorithm.ReverseChronological: {
+        case FeedAlgorithm.ReverseChronological:
           const followingIdsSubquery = db
             .selectFrom('follow')
             .select('follow.subjectDid')
@@ -60,11 +67,13 @@ export default function (server: Server, ctx: AppContext) {
             )
             .whereNotExists(
               hiddenQb
-              .whereRef('uri', '=', ref('post.uri')
-              .orWhereRef('uri', '=', ref('repost.uri'))))
-        }
+              .whereRef('uri', '=', ref('post.uri'))
+              .orWhereRef('uri', '=', ref('repost.uri')))
+
         
-        case FeedAlgorithm.AllPosts: {
+          break
+        
+        case FeedAlgorithm.AllPosts: 
           postQb = feedService
             .selectPostQb()
             .whereNotExists(mutedQb.whereRef('did', '=', ref('post.creator'))) // Hide posts of muted actors
@@ -77,29 +86,32 @@ export default function (server: Server, ctx: AppContext) {
                 .whereRef('did', '=', ref('post.creator')) // Hide reposts of or by muted actors
                 .orWhereRef('did', '=', ref('repost.creator')),
             )
-            .whereNotExists(
+            .orWhereNotExists(
               hiddenQb
-              .whereRef('uri', '=', ref('post.uri')
-              .orWhereRef('uri', '=', ref('repost.uri'))))
-        }
-        default: {
+              .whereRef('uri', '=', ref('post.uri'))
+              .orWhereRef('uri', '=', ref('repost.uri')))
+          break
+        default: 
           throw new InvalidRequestError(`Unsupported algorithm: ${algorithm}`)
-        }
+        
       }
 
       const keyset = new FeedKeyset(ref('cursor'), ref('postCid'))
       let feedItemsQb = db
         .selectFrom(postQb.union(repostQb).as('feed_items'))
         .selectAll()
+        
+      
       feedItemsQb = paginate(feedItemsQb, {
         limit,
         before,
         keyset,
       })
       
-      const feedItems: FeedRow[] = await feedItemsQb.execute() as FeedRow[];
+      const feedItems: FeedRow[] = await feedItemsQb.execute() as FeedRow[]
       const feed = await composeFeed(feedService, feedItems, requester)
 
+      
       return {
         encoding: 'application/json',
         body: {

@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`pds admin get moderation reports view gets all moderation reports for a record. 1`] = `
-Array [
-  Object {
+[
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 1,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       1,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
@@ -20,41 +20,41 @@ Array [
 `;
 
 exports[`pds admin get moderation reports view gets all moderation reports for a repo. 1`] = `
-Array [
-  Object {
+[
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 5,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       5,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 2,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(1)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 1,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       1,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(1)",
       "uri": "record(1)",
@@ -64,78 +64,78 @@ Array [
 `;
 
 exports[`pds admin get moderation reports view gets all moderation reports. 1`] = `
-Array [
-  Object {
+[
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 6,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 5,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(1)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       5,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(1)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 4,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 3,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(1)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       3,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(1)",
       "uri": "record(1)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 2,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(2)",
       "uri": "record(2)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 1,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(1)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       1,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(3)",
       "uri": "record(3)",
@@ -145,43 +145,43 @@ Array [
 `;
 
 exports[`pds admin get moderation reports view gets all resolved/unresolved moderation reports. 1`] = `
-Array [
-  Object {
+[
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 5,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       5,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 3,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       3,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 1,
     "reasonType": "com.atproto.report.reasonType#other",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [
+    "resolvedByActionIds": [
       1,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(1)",
       "uri": "record(1)",
@@ -191,37 +191,37 @@ Array [
 `;
 
 exports[`pds admin get moderation reports view gets all resolved/unresolved moderation reports. 2`] = `
-Array [
-  Object {
+[
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 6,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 4,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
   },
-  Object {
+  {
     "createdAt": "1970-01-01T00:00:00.000Z",
     "id": 2,
     "reasonType": "com.atproto.report.reasonType#spam",
     "reportedByDid": "user(0)",
-    "resolvedByActionIds": Array [],
-    "subject": Object {
+    "resolvedByActionIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(1)",
       "uri": "record(1)",
