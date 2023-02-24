@@ -167,14 +167,6 @@ export class Database {
     return this.cfg.dialect
   }
 
-  get schema(): string | undefined {
-    return this.cfg.dialect === 'pg' ? this.cfg.schema : undefined
-  }
-
-  get dialect(): Dialect {
-    return this.cfg.dialect
-  }
-
   get isTransaction() {
     return this.db.isTransaction
   }
@@ -190,20 +182,6 @@ export class Database {
     }
     await this.db.destroy()
     this.destroyed = true
-  }
-
-  async migrateToOrThrow(migration: string) {
-    if (this.schema !== undefined) {
-      await this.db.schema.createSchema(this.schema).ifNotExists().execute()
-    }
-    const { error, results } = await this.migrator.migrateTo(migration)
-    if (error) {
-      throw error
-    }
-    if (!results) {
-      throw new Error('An unknown failure occurred while migrating')
-    }
-    return results
   }
 
   async migrateToOrThrow(migration: string) {

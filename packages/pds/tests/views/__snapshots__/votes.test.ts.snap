@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`pds vote views fetches post votes 1`] = `
-Object {
+{
   "cursor": "0000000000000::bafycid",
   "uri": "record(0)",
-  "votes": Array [
-    Object {
-      "actor": Object {
-        "declaration": Object {
+  "votes": [
+    {
+      "actor": {
+        "declaration": {
           "actorType": "app.bsky.system.actorUser",
           "cid": "cids(0)",
         },
         "did": "user(0)",
         "handle": "eve.test",
-        "viewer": Object {
+        "viewer": {
           "muted": false,
         },
       },
@@ -21,15 +21,15 @@ Object {
       "direction": "down",
       "indexedAt": "1970-01-01T00:00:00.000Z",
     },
-    Object {
-      "actor": Object {
-        "declaration": Object {
+    {
+      "actor": {
+        "declaration": {
           "actorType": "app.bsky.system.actorUser",
           "cid": "cids(0)",
         },
         "did": "user(1)",
         "handle": "dan.test",
-        "viewer": Object {
+        "viewer": {
           "following": "record(1)",
           "muted": false,
         },
@@ -38,15 +38,15 @@ Object {
       "direction": "up",
       "indexedAt": "1970-01-01T00:00:00.000Z",
     },
-    Object {
-      "actor": Object {
-        "declaration": Object {
+    {
+      "actor": {
+        "declaration": {
           "actorType": "app.bsky.system.actorUser",
           "cid": "cids(0)",
         },
         "did": "user(2)",
         "handle": "carol.test",
-        "viewer": Object {
+        "viewer": {
           "followedBy": "record(3)",
           "following": "record(2)",
           "muted": false,
@@ -56,17 +56,17 @@ Object {
       "direction": "down",
       "indexedAt": "1970-01-01T00:00:00.000Z",
     },
-    Object {
-      "actor": Object {
+    {
+      "actor": {
         "avatar": "https://pds.public.url/image/KzkHFsMRQ6oAKCHCRKFA1H-rDdc7VOtvEVpUJ82TwyQ/rs:fill:1000:1000:1:0/plain/bafkreiaivizp4xldojmmpuzmiu75cmea7nq56dnntnuhzhsjcb63aou5ei@jpeg",
-        "declaration": Object {
+        "declaration": {
           "actorType": "app.bsky.system.actorUser",
           "cid": "cids(0)",
         },
         "did": "user(3)",
         "displayName": "bobby",
         "handle": "bob.test",
-        "viewer": Object {
+        "viewer": {
           "followedBy": "record(5)",
           "following": "record(4)",
           "muted": false,
@@ -81,19 +81,19 @@ Object {
 `;
 
 exports[`pds vote views fetches reply votes 1`] = `
-Object {
+{
   "cursor": "0000000000000::bafycid",
   "uri": "record(0)",
-  "votes": Array [
-    Object {
-      "actor": Object {
-        "declaration": Object {
+  "votes": [
+    {
+      "actor": {
+        "declaration": {
           "actorType": "app.bsky.system.actorUser",
           "cid": "cids(0)",
         },
         "did": "user(0)",
         "handle": "carol.test",
-        "viewer": Object {
+        "viewer": {
           "followedBy": "record(2)",
           "following": "record(1)",
           "muted": false,

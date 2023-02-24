@@ -9,33 +9,40 @@ export default function (server: Server, ctx: AppContext) {
   server.app.bsky.feed.getTimeline({
     auth: ctx.accessVerifier,
     handler: async ({ params, auth }) => {
-      const { algorithm, limit, before } = params
+      const { limit, before } = params
+      let { algorithm } = params
       const db = ctx.db.db
       const { ref } = db.dynamic
       const requester = auth.credentials.did
-
+            
       const feedService = ctx.services.feed(ctx.db)
-
+      
       // which users are muted?
       const mutedQb = db
         .selectFrom('mute')
         .select('did')
         .where('mutedByDid', '=', requester)
-
+        
       const hiddenQb = db
         .selectFrom('hide')
         .select('uri')
         .where('hiddenByDid', '=', requester)
-
+      
       let postQb
-      let repostQb
-      switch (algorithm) {
+      let repostQb 
+      
+      // default to reverse chronilogical
+      if (algorithm === undefined) {
+        algorithm = FeedAlgorithm.ReverseChronological
+      }
+      
+      switch(algorithm) {
         case FeedAlgorithm.ReverseChronological:
           const followingIdsSubquery = db
             .selectFrom('follow')
             .select('follow.subjectDid')
             .where('follow.creator', '=', requester)
-
+          
           postQb = feedService
             .selectPostQb()
             .where((qb) =>
@@ -45,7 +52,7 @@ export default function (server: Server, ctx: AppContext) {
             )
             .whereNotExists(mutedQb.whereRef('did', '=', ref('post.creator'))) // Hide posts of muted actors
             .whereNotExists(hiddenQb.whereRef('uri', '=', ref('post.uri'))) // Remove hidden posts
-
+            
           repostQb = feedService
             .selectRepostQb()
             .where((qb) =>
@@ -60,17 +67,18 @@ export default function (server: Server, ctx: AppContext) {
             )
             .whereNotExists(
               hiddenQb
-                .whereRef('uri', '=', ref('post.uri'))
-                .orWhereRef('uri', '=', ref('repost.uri')),
-            )
-          break
+              .whereRef('uri', '=', ref('post.uri'))
+              .orWhereRef('uri', '=', ref('repost.uri')))
 
-        case FeedAlgorithm.AllPosts:
+        
+          break
+        
+        case FeedAlgorithm.AllPosts: 
           postQb = feedService
             .selectPostQb()
             .whereNotExists(mutedQb.whereRef('did', '=', ref('post.creator'))) // Hide posts of muted actors
             .whereNotExists(hiddenQb.whereRef('uri', '=', ref('post.uri'))) // Remove hidden posts
-
+            
           repostQb = feedService
             .selectRepostQb()
             .whereNotExists(
@@ -78,29 +86,32 @@ export default function (server: Server, ctx: AppContext) {
                 .whereRef('did', '=', ref('post.creator')) // Hide reposts of or by muted actors
                 .orWhereRef('did', '=', ref('repost.creator')),
             )
-            .whereNotExists(
+            .orWhereNotExists(
               hiddenQb
-                .whereRef('uri', '=', ref('post.uri'))
-                .orWhereRef('uri', '=', ref('repost.uri')),
-            )
+              .whereRef('uri', '=', ref('post.uri'))
+              .orWhereRef('uri', '=', ref('repost.uri')))
           break
-        default:
+        default: 
           throw new InvalidRequestError(`Unsupported algorithm: ${algorithm}`)
+        
       }
 
       const keyset = new FeedKeyset(ref('cursor'), ref('postCid'))
       let feedItemsQb = db
         .selectFrom(postQb.union(repostQb).as('feed_items'))
         .selectAll()
+        
+      
       feedItemsQb = paginate(feedItemsQb, {
         limit,
         before,
         keyset,
       })
-
-      const feedItems: FeedRow[] = (await feedItemsQb.execute()) as FeedRow[]
+      
+      const feedItems: FeedRow[] = await feedItemsQb.execute() as FeedRow[]
       const feed = await composeFeed(feedService, feedItems, requester)
 
+      
       return {
         encoding: 'application/json',
         body: {

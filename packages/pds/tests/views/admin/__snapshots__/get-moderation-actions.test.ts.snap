@@ -1,178 +1,178 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`pds admin get moderation actions view gets all moderation actions for a record. 1`] = `
-Array [
-  Object {
+[
+  {
     "action": "com.atproto.admin.moderationAction#flag",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 1,
     "reason": "X",
-    "resolvedReportIds": Array [
+    "resolvedReportIds": [
       1,
     ],
-    "reversal": Object {
+    "reversal": {
       "createdAt": "1970-01-01T00:00:00.000Z",
       "createdBy": "Y",
       "reason": "X",
     },
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
 ]
 `;
 
 exports[`pds admin get moderation actions view gets all moderation actions for a repo. 1`] = `
-Array [
-  Object {
+[
+  {
     "action": "com.atproto.admin.moderationAction#flag",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 5,
     "reason": "X",
-    "resolvedReportIds": Array [
+    "resolvedReportIds": [
       3,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(0)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#acknowledge",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 2,
     "reason": "X",
-    "resolvedReportIds": Array [],
-    "subject": Object {
+    "resolvedReportIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#flag",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 1,
     "reason": "X",
-    "resolvedReportIds": Array [
+    "resolvedReportIds": [
       1,
     ],
-    "reversal": Object {
+    "reversal": {
       "createdAt": "1970-01-01T00:00:00.000Z",
       "createdBy": "Y",
       "reason": "X",
     },
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(1)",
       "uri": "record(1)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
 ]
 `;
 
 exports[`pds admin get moderation actions view gets all moderation actions. 1`] = `
-Array [
-  Object {
+[
+  {
     "action": "com.atproto.admin.moderationAction#acknowledge",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 6,
     "reason": "X",
-    "resolvedReportIds": Array [],
-    "subject": Object {
+    "resolvedReportIds": [],
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(0)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#flag",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 5,
     "reason": "X",
-    "resolvedReportIds": Array [
+    "resolvedReportIds": [
       3,
     ],
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.repoRef",
       "did": "user(1)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#flag",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 4,
     "reason": "X",
-    "resolvedReportIds": Array [],
-    "subject": Object {
+    "resolvedReportIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(0)",
       "uri": "record(0)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#takedown",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 3,
     "reason": "X",
-    "resolvedReportIds": Array [],
-    "subject": Object {
+    "resolvedReportIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(1)",
       "uri": "record(1)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#acknowledge",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 2,
     "reason": "X",
-    "resolvedReportIds": Array [],
-    "subject": Object {
+    "resolvedReportIds": [],
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(2)",
       "uri": "record(2)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
-  Object {
+  {
     "action": "com.atproto.admin.moderationAction#flag",
     "createdAt": "1970-01-01T00:00:00.000Z",
     "createdBy": "Y",
     "id": 1,
     "reason": "X",
-    "resolvedReportIds": Array [
+    "resolvedReportIds": [
       1,
     ],
-    "reversal": Object {
+    "reversal": {
       "createdAt": "1970-01-01T00:00:00.000Z",
       "createdBy": "Y",
       "reason": "X",
     },
-    "subject": Object {
+    "subject": {
       "$type": "com.atproto.repo.strongRef",
       "cid": "cids(3)",
       "uri": "record(3)",
     },
-    "subjectBlobCids": Array [],
+    "subjectBlobCids": [],
   },
 ]
 `;

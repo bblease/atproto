@@ -202,17 +202,6 @@ export class ActorService {
     return scrypt.verify(password, found.passwordScrypt)
   }
 
-  async verifyUserDidPassword(did: string, password: string): Promise<boolean> {
-    const found = await this.db.db
-      .selectFrom('did_handle')
-      .where('did_handle.did', '=', did)
-      .innerJoin('user_account', 'user_account.did', 'did_handle.did')
-      .selectAll()
-      .executeTakeFirst()
-    if (!found) return false
-    return scrypt.verify(password, found.passwordScrypt)
-  }
-
   async mute(info: { did: string; mutedByDid: string; createdAt?: Date }) {
     const { did, mutedByDid, createdAt = new Date() } = info
     await this.db.db
