@@ -165,6 +165,19 @@ describe('timeline views', () => {
     expect(full.data.feed.length).toEqual(7)
     expect(results(paginatedAll)).toEqual(results([full.data]))
   })
+  
+  it('fetches a global feed.', async () => {
+    // carol only follows bob
+    // if successful, her feed will include all posts and equal alice's snapshot
+    const carolTL = await agent.api.app.bsky.feed.getTimeline(
+      { algorithm: FeedAlgorithm.AllPosts },
+      {
+        headers: sc.getHeaders(carol),
+      },
+    )
+
+    expect(forSnapshot(carolTL.data.feed)).toMatchSnapshot()
+  }) 
 
   it('blocks posts, reposts, replies by actor takedown', async () => {
     const actionResults = await Promise.all(
