@@ -68,7 +68,7 @@ export default function (server: Server, ctx: AppContext) {
             .whereNotExists(
               hiddenQb
               .whereRef('uri', '=', ref('post.uri'))
-              .orWhereRef('uri', '=', ref('repost.uri')))
+              .whereRef('uri', '=', ref('repost.uri')))
 
         
           break
@@ -84,12 +84,12 @@ export default function (server: Server, ctx: AppContext) {
             .whereNotExists(
               mutedQb
                 .whereRef('did', '=', ref('post.creator')) // Hide reposts of or by muted actors
-                .orWhereRef('did', '=', ref('repost.creator')),
+                .whereRef('did', '=', ref('repost.creator')),
             )
             .orWhereNotExists(
               hiddenQb
               .whereRef('uri', '=', ref('post.uri'))
-              .orWhereRef('uri', '=', ref('repost.uri')))
+              .whereRef('uri', '=', ref('repost.uri')))
           break
         default: 
           throw new InvalidRequestError(`Unsupported algorithm: ${algorithm}`)
